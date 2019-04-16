@@ -6,8 +6,11 @@ Bundler.require
 require_relative 'lib/game'
 require_relative 'lib/player'
 
+# initialize Game
 player1 = Player.new('Josiane')
 player2 = Player.new('José')
+
+# Game loop
 while player1.life_points.positive? && player2.life_points.positive?
   puts "Voici l'état de chauqe joueur"
   puts "   #{player1.name} a #{player1.life_points} points de vie"

@@ -6,17 +6,19 @@ Bundler.require
 require_relative 'lib/game'
 require_relative 'lib/player'
 
+# welcome message
 puts "------------------------------------------------
 |Bienvenue sur 'ILS VEULENT TOUS MA POO' !      |
 |Le but du jeu est d'être le dernier survivant !|
 -------------------------------------------------"
 
+# initialize Game
 puts 'Quel est le nom de ton joueur ?'
 print '>>>'
 player1 = HumanPlayer.new(gets.chomp.to_s)
-
 array_bot = [bot_1 = Player.new('José'), bot_2 = Player.new('Josiane')]
 
+# Game loop
 puts 'Début du combat'
 while player1.life_points.positive? && (bot_1.life_points.positive? || bot_2.life_points.positive?)
   player1.show_state
@@ -58,6 +60,8 @@ while player1.life_points.positive? && (bot_1.life_points.positive? || bot_2.lif
   array_bot.each { |bot| bot.attack(player1) if bot.life_points.positive? }
   gets.chomp
 end
+
+# end of the Game
 puts 'La partie est finie'
 if player1.life_points.positive?
   puts 'BRAVO ! TU AS GAGNÉ !'
