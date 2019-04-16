@@ -1,18 +1,18 @@
+# frozen_string_literal: true
+
 require 'bundler'
 Bundler.require
 
 require_relative 'lib/game'
 require_relative 'lib/player'
 
-
-
 puts "------------------------------------------------
 |Bienvenue sur 'ILS VEULENT TOUS MA POO' !      |
 |Le but du jeu est d'être le dernier survivant !|
 -------------------------------------------------"
 
-puts "Quel est ton pseudo ?"
-print ">>>"
+puts 'Quel est ton pseudo ?'
+print '>>>'
 pseudo = gets.chomp.to_s
 my_game = Game.new(pseudo)
 
