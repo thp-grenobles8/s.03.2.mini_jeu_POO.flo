@@ -66,24 +66,25 @@ class Game
       choice = gets.chomp.to_s
     end
 
-    choice == 'a' ?
-      (HumanPlayer.weapon
-      @human_player.search_weapon)
-      : choice == 's' ?
-        (HumanPlayer.heal
-        @human_player.search_health_pack)
-        :
-          (Player.next_attack
-          @human_player.attack(@enemies_in_sight[choice.to_i])
-          if @enemies_in_sight[choice.to_i].life_points <= 0
-            kill_player(@enemies_in_sight[choice.to_i])
-          end)
+    if choice == 'a'
+      HumanPlayer.weapon
+      @human_player.search_weapon
+    elsif choice == 's'
+      HumanPlayer.heal
+      @human_player.search_health_pack
+    else
+      (Player.next_attack
+      @human_player.attack(@enemies_in_sight[choice.to_i])
+      if @enemies_in_sight[choice.to_i].life_points <= 0
+        kill_player(@enemies_in_sight[choice.to_i])
+      end)
+    end
   end
 
   # all enemies attack the player
   def enemies_attack
     print '>>>'
-    unless @enemies_in_sight.empty?
+    if @enemies_in_sight.empty?
       print "Il n'y a pas d'ennemis en vue tu n'es donc pas attaqué"
       puts '... pour cette fois'
     end
@@ -107,14 +108,13 @@ class Game
     puts '>>> Tous les joueurs sont déjà en vue' if @players_left.zero?
     if @players_left.positive?
       dice = rand(1..6)
-      case
-      when dice == 1
+      if dice == 1
         puts ">>> Tu as de la chance il n'y a pas de nouvel adversaire en plus"
-      when dice.between?(2, 4)
+      elsif dice.between?(2, 4)
         @enemies_in_sight << Player.new("bot_#{@enemies_tot - @players_left}")
         @players_left -= 1
         puts ">>> Tu as un nouvel adversaire #{enemies_in_sight[-1].name}"
-      when dice > 4
+      elsif dice > 4
         2.times do
           @enemies_in_sight << Player.new("bot_#{@enemies_tot - @players_left}")
           @players_left -= 1
