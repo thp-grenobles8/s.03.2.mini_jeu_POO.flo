@@ -26,7 +26,7 @@ while player1.life_points > 0 && (bot_1.life_points > 0 || bot_2.life_points > 0
   a - chercher une meilleure arme
   s - chercher à se soigner
 
-  attaquer un joueur en vue : "
+  attaquer un joueur en vie : "
 
   print "0 - "
   bot_1.show_state

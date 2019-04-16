@@ -44,7 +44,7 @@ class Player
   end
 
   def self.next_attack
-    puts "Passons à la phase d'attaque :"
+    puts ">>>Passons à la phase d'attaque :"
     puts "       ___/________"
     puts "         /    \\  \\"
     puts "    @___/      \\@/"
@@ -110,13 +110,14 @@ class HumanPlayer < Player
   end
 
   def self.weapon
-    puts ",_._._._._._._._._|__________________________________________________________,
+    puts ">>>
+,_._._._._._._._._|__________________________________________________________,
 |_|_|_|_|_|_|_|_|_|_________________________________________________________/
                   !"
   end
 
   def self.heal
-    puts "
+    puts ">>>
        +++++++
        +:::::+              /~ .~\\    /~  ~\\
        +:::::+             '      `\\/'      *
