@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # new class player
 class Player
   attr_accessor :name, :life_points
@@ -11,7 +13,7 @@ class Player
   # show state of player
   def show_state
     print "Le joueur #{@name} a #{@life_points}"
-    puts " point#{@life_points>1 ? 's' : ''} de vie"
+    puts " point#{@life_points > 1 ? 's' : ''} de vie"
   end
 
   # deal damage to player

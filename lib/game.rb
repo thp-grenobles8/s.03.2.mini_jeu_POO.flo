@@ -3,12 +3,15 @@
 # create Game class
 class Game
   # variable accessible in the class
-  attr_accessor :human_player, :enemies, :enemies_in_sight, :players_left, :enemies_tot
+  attr_accessor :human_player, :enemies, :enemies_in_sight
+  attr_accessor :players_left, :enemies_tot
 
   # initialize a game with a name and number of enemies (default value = 4)
   def initialize(name, number_enemies = 10)
     @human_player = HumanPlayer.new(name)
-    @enemies = Array.new(number_enemies) { |i| "bot_#{i}" }.map { |bot| Player.new("#{bot}.to_s") }
+    @enemies = Array.new(number_enemies) { |i| "bot_#{i}" }.map do |bot|
+      Player.new("#{bot}.to_s")
+    end
     @players_left = number_enemies
     @enemies_tot = number_enemies
     @enemies_in_sight = []
@@ -21,7 +24,8 @@ class Game
 
   # check if the game is finish or not
   def is_still_ongoing?
-    @human_player.life_points.positive? && (!@enemies_in_sight.empty? || @players_left.positive?)
+    @human_player.life_points.positive? &&
+      (!@enemies_in_sight.empty? || @players_left.positive?)
   end
 
   # show statistics of the game life point of player and number of alive enemies
@@ -41,18 +45,18 @@ class Game
 
     '
     puts ' attaquer un joueur en vue : ' unless @enemies_in_sight.empty?
-    @enemies_in_sight.each { |bot|
-        print "#{@enemies_in_sight.index(bot)} - "
-        print "#{bot.show_state}"
-      }
+    @enemies_in_sight.each do |bot|
+      print "#{@enemies_in_sight.index(bot)} - "
+      print "#{bot.show_state}"
+    end
   end
 
   # check if the choice is valide
   def valide_choice?(choice)
     valide_choice_array = %w[a s]
-    @enemies_in_sight.each { |bot|
-        valide_choice_array << @enemies_in_sight.index(bot).to_s
-      }
+    @enemies_in_sight.each do |bot|
+      valide_choice_array << @enemies_in_sight.index(bot).to_s
+    end
     valide_choice_array.include?(choice)
   end
 
@@ -73,11 +77,11 @@ class Game
       HumanPlayer.heal
       @human_player.search_health_pack
     else
-      (Player.next_attack
+      Player.next_attack
       @human_player.attack(@enemies_in_sight[choice.to_i])
       if @enemies_in_sight[choice.to_i].life_points <= 0
         kill_player(@enemies_in_sight[choice.to_i])
-      end)
+      end
     end
   end
 
