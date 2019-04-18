@@ -2,7 +2,7 @@
 
 # new class player
 class Player
-  attr_accessor :name, :life_points
+  attr_accessor :name, :life_points, :compute_damage
 
   # initialize a player with a name and life points
   def initialize(name, life_points = 10)
