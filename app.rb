@@ -19,5 +19,5 @@ while player1.life_points.positive? && player2.life_points.positive?
 
   player1.attack(player2)
   player2.attack(player1) if player2.life_points.positive?
-  puts '----------------------------'
+  puts '-'*30
 end

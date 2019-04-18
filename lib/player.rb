@@ -21,20 +21,6 @@ class Player
     @life_points -= damage
     if @life_points <= 0
       puts "Le joueur #{@name} a été tué !"
-      puts "           Y
-           |      .
-           +._ O /
-           |  `#'
-           |  / \\
-              ())
-              d b
-
-               p
-            .-/-o
-           / /'
-      .--./ /     --------<
-          O'-._
-               `"
     end
   end
 
@@ -47,20 +33,15 @@ class Player
     player.get_damage(damage)
   end
 
+  # ascii art for attack
+  def self.next_attack
+    puts ">>> Passons à la phase d'attaque :"
+  end
+
+  private
   # rolled dice to deal damage
   def compute_damage
     rand(1..6)
-  end
-
-  # ascii art for attack
-  def self.next_attack
-    puts ">>>Passons à la phase d'attaque :"
-    puts '       ___/________'
-    puts '         /    \\  \\'
-    puts '    @___/      \\@/'
-    puts '   /\\__/        |'
-    puts '  / \\ /        / \\'
-    puts '_/__/__________|__\\__'
   end
 end
 
@@ -78,11 +59,6 @@ class HumanPlayer < Player
     print "Le joueur #{@name} a #{@life_points}"
     print " point#{@life_points > 1 ? 's' : ''}"
     puts " de vie et une arme de niveau #{@weapon_level}"
-  end
-
-  # redefine rolled dice with the weapon level
-  def compute_damage
-    rand(1..6) * @weapon_level
   end
 
   # search weapon to upgrade the weapon of HumanPlayer
@@ -144,5 +120,11 @@ class HumanPlayer < Player
        +:::::+                  `\\ * */'
        +:::::+                    `\\/'
        +++++++       "
+  end
+
+  private
+  # redefine rolled dice with the weapon level
+  def compute_damage
+    rand(1..6) * @weapon_level
   end
 end
